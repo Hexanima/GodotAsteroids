@@ -14,7 +14,7 @@ mesh = SubResource("PlaneMesh_pa7u7")
 
 [node name="Ship" parent="." instance=ExtResource("1_ap24v")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Ship"]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
