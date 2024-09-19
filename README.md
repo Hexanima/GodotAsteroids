@@ -2,6 +2,10 @@
 
 Una recreación del juego Asteroids usando Godot
 
+## Estado actual
+
+Mecanicas ya anotadas, proyecto listo para iniciar
+
 # Mecánicas
 
 Usado para anotar mecanicas u observaciones a recrear, como una CRC Card del libro C# Players Guide
