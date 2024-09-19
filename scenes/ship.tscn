@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bssnjx57jqcyl"]
+
+[ext_resource type="Script" path="res://scripts/ship.gd" id="1_rkevx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_52if6"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_v61sd"]
+size = Vector3(1, 1, 0)
+
+[node name="Ship" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_rkevx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_52if6")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(0, -1)
+rotation = 3.14159
+scale = Vector2(14, 14)
+mesh = SubResource("PrismMesh_v61sd")
