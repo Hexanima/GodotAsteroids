@@ -57,5 +57,3 @@ flip_v = true
 [node name="PropulsionAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_1h2o0")
 bus = &"SFX"
-
-[connection signal="finished" from="PropulsionAudio" to="." method="_on_propulsion_audio_finished"]
