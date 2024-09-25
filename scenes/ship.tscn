@@ -1,11 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://bssnjx57jqcyl"]
+[gd_scene load_steps=9 format=3 uid="uid://bssnjx57jqcyl"]
 
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_rkevx"]
+[ext_resource type="Texture2D" uid="uid://c3witpq0t8uwe" path="res://assets/sprites/ship.png" id="2_gioot"]
+[ext_resource type="AudioStream" uid="uid://efaindkt8uxc" path="res://assets/sounds/PROPULSION.mp3" id="3_1h2o0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_52if6"]
 
-[sub_resource type="PrismMesh" id="PrismMesh_v61sd"]
-size = Vector3(1, 1, 0)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6a6ua"]
+atlas = ExtResource("2_gioot")
+region = Rect2(0, 20, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igop2"]
+atlas = ExtResource("2_gioot")
+region = Rect2(0, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tktw8"]
+atlas = ExtResource("2_gioot")
+region = Rect2(16, 0, 16, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_voyju"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6a6ua")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igop2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tktw8")
+}],
+"loop": true,
+"name": &"thrust",
+"speed": 24.0
+}]
 
 [node name="Ship" type="CharacterBody2D"]
 motion_mode = 1
@@ -14,8 +47,15 @@ script = ExtResource("1_rkevx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_52if6")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-position = Vector2(0, -1)
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 rotation = 3.14159
-scale = Vector2(14, 14)
-mesh = SubResource("PrismMesh_v61sd")
+sprite_frames = SubResource("SpriteFrames_voyju")
+animation = &"idle"
+autoplay = "idle"
+flip_v = true
+
+[node name="PropulsionAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_1h2o0")
+bus = &"SFX"
+
+[connection signal="finished" from="PropulsionAudio" to="." method="_on_propulsion_audio_finished"]
