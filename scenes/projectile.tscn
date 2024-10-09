@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckgxucys8u1bj"]
+
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_o1w2p"]
+[ext_resource type="AudioStream" uid="uid://b5ivkja8qnhyf" path="res://assets/sounds/LASER_SHOOT.mp3" id="2_2y5pn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dq8wk"]
+size = Vector2(2, 10)
+
+[sub_resource type="Gradient" id="Gradient_v6g30"]
+offsets = PackedFloat32Array(0.974026)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0ovfd"]
+gradient = SubResource("Gradient_v6g30")
+width = 2
+
+[node name="Projectile" type="CharacterBody2D"]
+collision_layer = 0
+motion_mode = 1
+script = ExtResource("1_o1w2p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dq8wk")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 2.38419e-07)
+scale = Vector2(1, 10)
+texture = SubResource("GradientTexture1D_0ovfd")
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_2y5pn")
+autoplay = true
+
+[connection signal="finished" from="Audio" to="." method="_on_audio_finished"]
