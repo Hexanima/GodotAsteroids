@@ -35,7 +35,7 @@ func handle_audio():
 
 func handle_shoot():
 	if Input.is_action_just_pressed("shoot"):
-		on_shoot.emit(rotation,global_position + calc_direction() * 24)
+		on_shoot.emit(rotation,global_position + calc_direction() * 32)
 
 func _physics_process(delta):
 	handle_movement(delta)

@@ -14,9 +14,8 @@ colors = PackedColorArray(1, 1, 1, 1)
 gradient = SubResource("Gradient_v6g30")
 width = 2
 
-[node name="Projectile" type="CharacterBody2D"]
+[node name="Projectile" type="AnimatableBody2D"]
 collision_layer = 0
-motion_mode = 1
 script = ExtResource("1_o1w2p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -34,5 +33,6 @@ texture = SubResource("GradientTexture1D_0ovfd")
 [node name="Audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_2y5pn")
 autoplay = true
+bus = &"SFX"
 
 [connection signal="finished" from="Audio" to="." method="_on_audio_finished"]
