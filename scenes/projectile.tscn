@@ -16,14 +16,11 @@ width = 2
 
 [node name="Projectile" type="AnimatableBody2D"]
 collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_o1w2p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dq8wk")
-
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 2.38419e-07)
@@ -35,4 +32,9 @@ stream = ExtResource("2_2y5pn")
 autoplay = true
 bus = &"SFX"
 
-[connection signal="finished" from="Audio" to="." method="_on_audio_finished"]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_dq8wk")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

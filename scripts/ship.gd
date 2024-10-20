@@ -8,6 +8,8 @@ const ROTATION_SPEED = 5
 
 signal on_shoot(direction: float, position: Vector2)
 
+signal collision()
+
 func calc_direction():
 	var vec = Vector2(0,-1).rotated(rotation)
 	return vec

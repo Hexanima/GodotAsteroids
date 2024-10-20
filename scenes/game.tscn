@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cgsvcrltekbgv"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_3obfp"]
-[ext_resource type="PackedScene" uid="uid://bssnjx57jqcyl" path="res://scenes/ship.tscn" id="1_ap24v"]
 [ext_resource type="PackedScene" uid="uid://bcvhfngw04d5v" path="res://scenes/projectile_handler.tscn" id="3_qsypm"]
+[ext_resource type="PackedScene" uid="uid://cottew0pi4yra" path="res://scenes/ship_handler.tscn" id="4_orpmg"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pa7u7"]
 orientation = 2
@@ -15,13 +15,8 @@ position = Vector2(-220, -155)
 scale = Vector2(80, 80)
 mesh = SubResource("PlaneMesh_pa7u7")
 
-[node name="Ship" parent="." instance=ExtResource("1_ap24v")]
-
-[node name="Camera2D" type="Camera2D" parent="Ship"]
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-
 [node name="ProjectileHandler" parent="." instance=ExtResource("3_qsypm")]
 
-[connection signal="on_shoot" from="Ship" to="." method="_on_ship_on_shoot"]
+[node name="ShipHandler" parent="." instance=ExtResource("4_orpmg")]
+
+[connection signal="ship_shooting" from="ShipHandler" to="." method="_on_ship_handler_ship_shooting"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cottew0pi4yra"]
+
+[ext_resource type="Script" path="res://scripts/ship_handler.gd" id="1_4e7r6"]
+[ext_resource type="PackedScene" uid="uid://cu7f4d3e3e3wj" path="res://scenes/camera.tscn" id="2_lppsw"]
+
+[node name="ShipHandler" type="Node2D"]
+script = ExtResource("1_4e7r6")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="CamControl" type="Node2D" parent="."]
+
+[node name="Camera" parent="CamControl" instance=ExtResource("2_lppsw")]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
