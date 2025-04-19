@@ -17,9 +17,9 @@ Es mas facil programar autodestruccion que programar destruccion ajena, asi que 
 ### Tamaño
 
 - Cuenta con diferentes tamaños
-    - Pequeño
-    - Mediano
-    - Grande
+	- Pequeño
+	- Mediano
+	- Grande
 
 ### Movimiento
 
@@ -31,16 +31,16 @@ Es mas facil programar autodestruccion que programar destruccion ajena, asi que 
 
 - Asteroides pueden colisionar con naves y proyectiles
 - Cuando un asteroide colisiona con algo:
-    - Si el asteroide es de tamaño mas grande a pequeño, genera dos asteroides de un tamaño menos
-    - Se destruye el asteroide
+	- Si el asteroide es de tamaño mas grande a pequeño, genera dos asteroides de un tamaño menos
+	- Se destruye el asteroide
 
 ## Nave
 
 ### Movimiento
 
 - Controles de tanque, con lo que su movimiento consta de:
-    - Girar hacia los lados
-    - Moverse hacia donde apunta
+	- Girar hacia los lados
+	- Moverse hacia donde apunta
 - Tiene un efecto deslizamiento, cuando deja de acelerar hacia adelante, patina como hielo, teniendo aun una velocidad pero que disminuye lentamente
 
 ### Ataque
@@ -56,8 +56,8 @@ Es mas facil programar autodestruccion que programar destruccion ajena, asi que 
 ### Tamaños
 
 - Puede tener dos tamaños
-    - Pequeña
-    - Grande
+	- Pequeña
+	- Grande
 
 ### Movimiento
 

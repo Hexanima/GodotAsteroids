@@ -19,9 +19,10 @@ func handle_movement(delta: float):
 		rotation -= ROTATION_SPEED * delta
 	if Input.is_action_pressed("right"):
 		rotation += ROTATION_SPEED * delta
+	
 	if Input.is_action_pressed("forward"):
 		velocity += calc_direction() * SPEED * delta
-	velocity -= velocity * delta * 0.5
+		velocity -= velocity * delta * 0.5
 
 func handle_anim():
 	if Input.is_action_pressed("forward"):

@@ -9,7 +9,6 @@ func calc_direction():
 
 func handle_movement(delta: float):
 	return calc_direction() * SPEED * delta
-	return Vector2.ZERO
 
 func _physics_process(delta):
 	move_and_collide(handle_movement(delta))
