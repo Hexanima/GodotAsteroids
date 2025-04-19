@@ -8,6 +8,7 @@ const ROTATION_SPEED = 5
 
 signal on_shoot(direction: float, position: Vector2)
 
+@warning_ignore("unused_signal")
 signal collision()
 
 func calc_direction():
