@@ -8,7 +8,6 @@ const DEATH_SOUND = preload("res://scenes/self_deleting_sound.tscn")
 signal ship_shooting(dir: float, pos: Vector2)
 var ship
 const PLAYER_DIED: AudioStreamMP3 = preload("res://assets/sounds/PLAYER_DIED.mp3")
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	new_ship()
 	
@@ -24,7 +23,6 @@ func play_death_sound():
 	death_sound.position = ship.position
 	add_child(death_sound)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	cam_control.position = ship.position if ship != null else Vector2.ZERO
 

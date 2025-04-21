@@ -1,7 +1,7 @@
 extends AnimatableBody2D
 @onready var collision_shape_2d = $CollisionShape2D
 
-const SPEED: float = 750
+const SPEED: float = 1000
 
 func calc_direction():
 	var vec = Vector2(0,-1).rotated(rotation)
@@ -17,6 +17,6 @@ func _on_audio_finished():
 	queue_free()
 
 func _on_area_2d_body_entered(body):
-	if body.collision != null:
+	if (body != self && body.collision != null):
 		body.collision.emit()
-	queue_free()
+		queue_free()

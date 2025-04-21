@@ -8,11 +8,20 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_3obfp")
 
+[node name="Asteroid4" parent="." instance=ExtResource("4_lbhrr")]
+position = Vector2(-148, 83)
+
+[node name="Asteroid3" parent="." instance=ExtResource("4_lbhrr")]
+position = Vector2(133, 53)
+
+[node name="Asteroid2" parent="." instance=ExtResource("4_lbhrr")]
+position = Vector2(105, -102)
+
+[node name="Asteroid" parent="." instance=ExtResource("4_lbhrr")]
+position = Vector2(-137, -119)
+
 [node name="ProjectileHandler" parent="." instance=ExtResource("3_qsypm")]
 
 [node name="ShipHandler" parent="." instance=ExtResource("4_orpmg")]
-
-[node name="Asteroid" parent="." instance=ExtResource("4_lbhrr")]
-position = Vector2(0, -133)
 
 [connection signal="ship_shooting" from="ShipHandler" to="." method="_on_ship_handler_ship_shooting"]
