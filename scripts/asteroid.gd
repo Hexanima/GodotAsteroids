@@ -11,13 +11,13 @@ const MAX_ROTATION_SPEED: float = 10.0
 const MIN_SPEED: float = 20.0
 const MAX_SPEED: float = 150.0
 
-var _rotation_speed: float = randf_range(0 - MAX_ROTATION_SPEED,MAX_ROTATION_SPEED)
+var _rotation_speed: float = randf_range(0 - MAX_ROTATION_SPEED, MAX_ROTATION_SPEED)
 var _movement_speed: float = randf_range(MIN_SPEED, MAX_SPEED)
 
 var _size: int = 3
 
 func calc_direction():
-	var vec = Vector2(0,-1).rotated(rotation)
+	var vec = Vector2(0, -1).rotated(rotation)
 	return vec
 	
 @onready var asteroid: Sprite2D = $Asteroid
@@ -25,11 +25,11 @@ func calc_direction():
 @onready var collision_shape_2d_of_area2d: CollisionShape2D = $Area2D/CollisionShape2D
 
 func handle_size() -> void:
-	asteroid.scale = Vector2(_size * (1.0 / 3.0),_size * (1.0 / 3.0))
-	collision_shape_2d.scale = Vector2(_size * (1.0 / 3.0),_size * (1.0 / 3.0))
-	collision_shape_2d_of_area2d.scale = Vector2(_size * (1.0 / 3.0),_size * (1.0 / 3.0))
+	asteroid.scale = Vector2(_size * (1.0 / 3.0), _size * (1.0 / 3.0))
+	collision_shape_2d.scale = Vector2(_size * (1.0 / 3.0), _size * (1.0 / 3.0))
+	collision_shape_2d_of_area2d.scale = Vector2(_size * (1.0 / 3.0), _size * (1.0 / 3.0))
 	
-func handle_movement()->void:
+func handle_movement() -> void:
 	linear_velocity = calc_direction() * _movement_speed
 	
 func _ready() -> void:
@@ -61,5 +61,5 @@ func _on_life_span_timeout() -> void:
 	queue_free()
 
 func _on_collision() -> void:
-	collision_spawn.emit(self.global_position,_size)
+	collision_spawn.emit(self.global_position, _size)
 	handle_death()

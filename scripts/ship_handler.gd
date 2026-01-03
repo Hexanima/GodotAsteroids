@@ -6,9 +6,14 @@ extends Node2D
 const SHIP = preload("res://scenes/ship.tscn")
 const DEATH_SOUND = preload("res://scenes/self_deleting_sound.tscn")
 
+# 
+#
+
 signal ship_shooting(dir: float, pos: Vector2)
+signal camera_info_updated(camera_pos: Vector2, viewport_size: Vector2)
 var ship
 const PLAYER_DIED: AudioStreamMP3 = preload("res://assets/sounds/PLAYER_DIED.mp3")
+
 func _ready():
 	new_ship()
 	
@@ -24,19 +29,30 @@ func play_death_sound():
 	death_sound.position = ship.position
 	add_child(death_sound)
 
-func _physics_process(delta: float):
+func _process(_delta: float):
+	if (Input.is_action_just_pressed("shoot")):
+		print(get_viewport_rect())
+
+var last_camera_pos: Vector2
+
+func _physics_process(_delta: float):
 	cam_control.position = ship.position if ship != null else Vector2.ZERO
+	
+	# Solo emitir si la cámara se movió lo suficiente
+	if ship != null and last_camera_pos.distance_to(camera.global_position) > 10:
+		var viewport = camera.get_viewport_rect()
+		camera_info_updated.emit(camera.global_position, viewport.size)
+		last_camera_pos = camera.global_position
 
 func _on_ship_shoot(dir: float, pos: Vector2):
 	ship_shooting.emit(dir, pos)
-	get_screen_center()
 	
 func get_screen_center() -> Vector2:
-	var viewporttt = camera.get_viewport_rect()
+	var viewport = camera.get_viewport_rect()
 	
 	print("-------------------------------------------------------")
-	print(viewporttt.position) # TOP-LEFT
-	print(viewporttt.get_center())
+	print(viewport.position) # TOP-LEFT
+	print(viewport.get_center())
 	print(camera.global_position)
 	print("-------------------------------------------------------")
 	
@@ -50,4 +66,4 @@ func _on_ship_collision():
 
 func _on_timer_timeout():
 	new_ship()
-	camera.position_smoothing_speed = 10	
+	camera.position_smoothing_speed = 10
