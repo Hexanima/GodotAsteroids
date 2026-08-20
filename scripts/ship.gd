@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var sprite = $Sprite
 @onready var propulsion_audio = $PropulsionAudio
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 const SPEED = 300.0
 const ROTATION_SPEED = 5
@@ -10,6 +11,12 @@ signal on_shoot(direction: float, position: Vector2)
 
 @warning_ignore("unused_signal")
 signal collision()
+
+func invincibility_anim():
+	animation_player.play("invincible")
+
+func regular_anim():
+	animation_player.play("regular")
 
 func calc_direction():
 	var vec = Vector2(0,-1).rotated(rotation)

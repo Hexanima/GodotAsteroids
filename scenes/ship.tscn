@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bssnjx57jqcyl"]
+[gd_scene format=3 uid="uid://bssnjx57jqcyl"]
 
 [ext_resource type="Script" uid="uid://dwb5s4wau81fy" path="res://scripts/ship.gd" id="1_rkevx"]
 [ext_resource type="Texture2D" uid="uid://c3witpq0t8uwe" path="res://assets/sprites/ship.png" id="2_gioot"]
@@ -24,7 +24,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6a6ua")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -35,25 +35,83 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tktw8")
 }],
-"loop": true,
+"loop": 1,
 "name": &"thrust",
 "speed": 24.0
 }]
 
-[node name="Ship" type="CharacterBody2D"]
+[sub_resource type="Animation" id="Animation_4tobq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tfsc7"]
+resource_name = "invincible"
+length = 0.33
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.33),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.19607843), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gudjc"]
+resource_name = "regular"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gudjc"]
+_data = {
+&"RESET": SubResource("Animation_4tobq"),
+&"invincible": SubResource("Animation_tfsc7"),
+&"regular": SubResource("Animation_gudjc")
+}
+
+[node name="Ship" type="CharacterBody2D" unique_id=774340373]
 motion_mode = 1
 script = ExtResource("1_rkevx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=248891375]
 shape = SubResource("CircleShape2D_52if6")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=171645070]
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_voyju")
 animation = &"idle"
 autoplay = "idle"
 flip_v = true
 
-[node name="PropulsionAudio" type="AudioStreamPlayer2D" parent="."]
+[node name="PropulsionAudio" type="AudioStreamPlayer2D" parent="." unique_id=922739082]
 stream = ExtResource("3_1h2o0")
 bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=873397917]
+libraries/ = SubResource("AnimationLibrary_gudjc")

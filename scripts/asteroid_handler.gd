@@ -4,8 +4,19 @@ const ASTEROID = preload("res://scenes/asteroid.tscn")
 # Variables para almacenar info de cámara
 var current_camera_pos: Vector2
 var current_viewport_size: Vector2
+@export var spawn_timer: float = 5
+var current_time: float
+
+func _ready() -> void:
+	current_time = spawn_timer
 
 func _process(_delta: float) -> void:
+	current_time -= _delta
+
+	if (current_time <= 0):
+		current_time = spawn_timer
+		spawn_asteroid_relative_to_camera()
+
 	if (Input.is_action_just_pressed("debug_spawn_asteroid")):
 		spawn_asteroid_relative_to_camera()
 
@@ -22,19 +33,20 @@ func spawn_asteroid_relative_to_camera():
 		
 	match spawn_side:
 		0: # Izquierda
-			spawn_pos = current_camera_pos + Vector2(-current_viewport_size.x / 2 - 100, randf_range(-current_viewport_size.y / 2, current_viewport_size.y / 2))
+			spawn_pos = current_camera_pos + Vector2(-current_viewport_size.x / 2, randf_range(-current_viewport_size.y / 2, current_viewport_size.y / 2))
 			target_direction = randf_range(-30, 30) # Hacia la derecha
 		1: # Derecha
-			spawn_pos = current_camera_pos + Vector2(current_viewport_size.x / 2 + 100, randf_range(-current_viewport_size.y / 2, current_viewport_size.y / 2))
+			spawn_pos = current_camera_pos + Vector2(current_viewport_size.x / 2, randf_range(-current_viewport_size.y / 2, current_viewport_size.y / 2))
 			target_direction = randf_range(150, 210) # Hacia la izquierda
 		2: # Arriba
-			spawn_pos = current_camera_pos + Vector2(randf_range(-current_viewport_size.x / 2, current_viewport_size.x / 2), -current_viewport_size.y / 2 - 100)
+			spawn_pos = current_camera_pos + Vector2(randf_range(-current_viewport_size.x / 2, current_viewport_size.x / 2), -current_viewport_size.y / 2)
 			target_direction = randf_range(60, 120) # Hacia abajo
 		3: # Abajo
-			spawn_pos = current_camera_pos + Vector2(randf_range(-current_viewport_size.x / 2, current_viewport_size.x / 2), current_viewport_size.y / 2 + 100)
+			spawn_pos = current_camera_pos + Vector2(randf_range(-current_viewport_size.x / 2, current_viewport_size.x / 2), current_viewport_size.y / 2 )
 			target_direction = randf_range(240, 300) # Hacia arriba
 		
 	summon_asteroid(spawn_pos, target_direction)
+	
 
 func summon_asteroid(start_pos: Vector2, rotation_degs: float):
 	var new_asteroid = ASTEROID.instantiate()

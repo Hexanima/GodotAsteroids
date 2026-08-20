@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://s0q2a4lwuapc"]
+[gd_scene format=3 uid="uid://s0q2a4lwuapc"]
 
 [ext_resource type="Script" uid="uid://cxse4uiyhf240" path="res://scripts/asteroid.gd" id="1_6mo6b"]
 [ext_resource type="Texture2D" uid="uid://co0ysy48kbxpa" path="res://assets/sprites/asteroid.png" id="1_akfqu"]
@@ -9,22 +9,22 @@ radius = 16.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_6mo6b"]
 radius = 17.0
 
-[node name="Asteroid" type="RigidBody2D"]
+[node name="Asteroid" type="RigidBody2D" unique_id=1576748561]
 gravity_scale = 0.0
 script = ExtResource("1_6mo6b")
 
-[node name="Asteroid" type="Sprite2D" parent="."]
+[node name="Asteroid" type="Sprite2D" parent="." unique_id=843373165]
 texture = ExtResource("1_akfqu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=376213548]
 shape = SubResource("CircleShape2D_akfqu")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1621737222]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=446031029]
 shape = SubResource("CircleShape2D_6mo6b")
 
-[node name="LifeSpan" type="Timer" parent="."]
+[node name="LifeSpan" type="Timer" parent="." unique_id=2112969647]
 wait_time = 25.0
 autostart = true
 

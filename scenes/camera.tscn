@@ -1,20 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://cu7f4d3e3e3wj"]
+[gd_scene format=3 uid="uid://cu7f4d3e3e3wj"]
 
 [ext_resource type="Texture2D" uid="uid://c34warnai0ctk" path="res://assets/sprites/stolen_bg.jpg" id="1_cvpoc"]
 
-[node name="Camera" type="Camera2D"]
-zoom = Vector2(2, 2)
+[node name="Camera" type="Camera2D" unique_id=666351102]
+zoom = Vector2(1.2, 1.2)
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 
-[node name="BG" type="Node2D" parent="."]
+[node name="BG" type="Node2D" parent="." unique_id=1110526272]
 
-[node name="Parallax2D" type="Parallax2D" parent="BG"]
+[node name="Parallax2D" type="Parallax2D" parent="BG" unique_id=535400621]
 repeat_size = Vector2(753, 360)
 repeat_times = 4
 follow_viewport = false
 
-[node name="StolenBg" type="Sprite2D" parent="BG/Parallax2D"]
+[node name="StolenBg" type="Sprite2D" parent="BG/Parallax2D" unique_id=926662829]
 z_index = -1
 texture_filter = 1
 texture = ExtResource("1_cvpoc")

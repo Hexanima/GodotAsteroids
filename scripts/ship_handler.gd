@@ -6,8 +6,9 @@ extends Node2D
 const SHIP = preload("res://scenes/ship.tscn")
 const DEATH_SOUND = preload("res://scenes/self_deleting_sound.tscn")
 
-# 
-#
+@export var invincibility_time: float = 3
+var current_timer: float
+var is_invincible = true
 
 signal ship_shooting(dir: float, pos: Vector2)
 signal camera_info_updated(camera_pos: Vector2, viewport_size: Vector2)
@@ -18,10 +19,22 @@ func _ready():
 	new_ship()
 	
 func new_ship():
+	is_invincible = true
+	current_timer = invincibility_time
 	ship = SHIP.instantiate()
 	ship.connect("on_shoot", _on_ship_shoot)
 	ship.connect("collision", _on_ship_collision)
 	add_child(ship)
+	enable_invins()
+
+func disable_invins():
+	is_invincible = false
+	if (ship != null):
+		ship.regular_anim()
+
+func enable_invins():
+	is_invincible = true
+	ship.invincibility_anim()
 	
 func play_death_sound():
 	var death_sound = DEATH_SOUND.instantiate()
@@ -30,6 +43,11 @@ func play_death_sound():
 	add_child(death_sound)
 
 func _process(_delta: float):
+	if (current_timer > 0 && is_invincible):
+		current_timer -= _delta
+	else:
+		disable_invins()
+
 	if (Input.is_action_just_pressed("shoot")):
 		print(get_viewport_rect())
 
@@ -59,10 +77,11 @@ func get_screen_center() -> Vector2:
 	return camera.get_screen_center_position()
 
 func _on_ship_collision():
-	play_death_sound()
-	ship.queue_free()
-	camera.position_smoothing_speed = 2
-	timer.start()
+	if (!is_invincible):
+		play_death_sound()
+		ship.queue_free()
+		camera.position_smoothing_speed = 2
+		timer.start()
 
 func _on_timer_timeout():
 	new_ship()
