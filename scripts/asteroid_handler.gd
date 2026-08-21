@@ -42,15 +42,21 @@ func spawn_asteroid_relative_to_camera():
 			spawn_pos = current_camera_pos + Vector2(randf_range(-current_viewport_size.x / 2, current_viewport_size.x / 2), -current_viewport_size.y / 2)
 			target_direction = randf_range(60, 120) # Hacia abajo
 		3: # Abajo
-			spawn_pos = current_camera_pos + Vector2(randf_range(-current_viewport_size.x / 2, current_viewport_size.x / 2), current_viewport_size.y / 2 )
+			spawn_pos = current_camera_pos + Vector2(randf_range(-current_viewport_size.x / 2, current_viewport_size.x / 2), current_viewport_size.y / 2)
 			target_direction = randf_range(240, 300) # Hacia arriba
 		
-	summon_asteroid(spawn_pos, target_direction)
-	
+	summon_asteroid(spawn_pos, target_direction, 3)
 
-func summon_asteroid(start_pos: Vector2, rotation_degs: float):
+func on_asteroid_break_spawn(pos: Vector2, size: int):
+	for i in randi_range(1, 3):
+		summon_asteroid(pos, randf_range(0, 360), size)
+
+func summon_asteroid(start_pos: Vector2, rotation_degs: float, size: int):
 	var new_asteroid = ASTEROID.instantiate()
+	new_asteroid._size = size
 	new_asteroid.position = start_pos
 	new_asteroid.rotation_degrees = rotation_degs
-	new_asteroid.handle_movement()
+	new_asteroid.connect("collision_spawn", on_asteroid_break_spawn)
 	add_child(new_asteroid)
+	new_asteroid.handle_movement()
+	new_asteroid.handle_size()
