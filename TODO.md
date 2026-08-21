@@ -6,8 +6,8 @@
   - [ ] Leaderboard en multiplayer
   - [ ] Flechas indicadoras de jugadores
   - [ ] Posible limite de mapa con wrap
-- [ ] Tamaños de asteroides
-- [ ] Sprites diversos asteroides (grax Jondel)
+- [x] Tamaños de asteroides
+- [x] Sprites diversos asteroides (grax Jondel)
 - [ ] Cambiar color/skin de nave (como en agar.io) (COLOR NEGRO NO, FONDO CACA)
 - [ ] Powerups
   - [ ] Velocidad (capaz tambien saca zoom del mapa)

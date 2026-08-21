@@ -5,6 +5,9 @@ class_name Asteroid
 const SELF_DELETING_SOUND = preload("res://scenes/self_deleting_sound.tscn")
 const ASTEROID_EXPLODE = preload("res://assets/sounds/ASTEROID_EXPLODE.mp3")
 
+const ASTEROID_TEXTURE = preload("res://assets/sprites/asteroid.png")
+const EASTER_TEXTURE = preload("res://assets/sprites/asteroid-easter.png")
+
 const MAX_ROTATION_SPEED: float = 10.0
 const MIN_SPEED: float = 20.0
 const MAX_SPEED: float = 150.0
@@ -16,7 +19,9 @@ var _size: int
 
 signal collision()
 signal collision_spawn(pos: Vector2, size: int)
-	
+
+@export_range(0.0, 1.0) var easter_probability: float = 0.2
+
 @onready var asteroid: Sprite2D = $Asteroid
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var collision_shape_2d_of_area2d: CollisionShape2D = $Area2D/CollisionShape2D
@@ -43,8 +48,12 @@ func handle_death():
 	
 func _ready() -> void:
 	rotation_degrees = randf_range(0, 360)
-	if (_size == null):
-		_size = 3
+
+	if randf() < easter_probability && _size < 3:
+		asteroid.texture = EASTER_TEXTURE
+	else:
+		asteroid.texture = ASTEROID_TEXTURE
+
 	handle_size()
 	handle_movement()
 
